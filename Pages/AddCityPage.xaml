@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WeatherApp.Pages.AddCityPage"
+             BackgroundColor="#87CEEB">
+
+    <VerticalStackLayout VerticalOptions="Center" 
+                         HorizontalOptions="Center"
+                         Spacing="20"> <!-- Adds spacing between elements -->
+
+        <Label Text="Add City"
+               FontSize="44"
+               FontAttributes="Bold"
+               TextColor="#1E3A8A"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center"
+               Margin="0,0,0,20" />
+        
+        <Entry Placeholder="Name"
+               WidthRequest="250"
+               FontSize="24"
+               BackgroundColor="White"
+               TextColor="#1E3A8A"
+               HorizontalTextAlignment="Center"
+               x:Name="InputName" />
+        
+        <Button Text="Add"
+                BackgroundColor="#1E3A8A"
+                TextColor="White"
+                CornerRadius="8"
+                WidthRequest="300"
+                FontSize="24"
+                Clicked="OnAddClicked" />
+        
+        <Button Text="Cancel"
+                BackgroundColor="#1E3A8A"
+                TextColor="White"
+                CornerRadius="8"
+                WidthRequest="300"
+                FontSize="24"
+                Clicked="OnCancelClicked" />
+
+    </VerticalStackLayout>
+</ContentPage>

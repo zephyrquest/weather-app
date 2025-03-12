@@ -1,47 +1,32 @@
-﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
-using WeatherApp.Models;
+﻿using WeatherApp.Pages;
+using WeatherApp.ViewModels;
 
 namespace WeatherApp;
 
-public partial class CitiesListPage : ContentPage, INotifyPropertyChanged
+public partial class CitiesListPage : ContentPage
 {
-    private ObservableCollection<City> _cities;
-
-    public ObservableCollection<City> Cities
-    {
-        get => _cities;
-        set
-        {
-            _cities = value;
-            OnPropertyChanged();
-        }
-    }
+    public CitiesListViewModel CitiesListViewModel = new CitiesListViewModel();
     
     public CitiesListPage()
     {
         InitializeComponent();
         
-        BindingContext = this;
+        BindingContext = CitiesListViewModel;
     }
     
-    public event PropertyChangedEventHandler? PropertyChanged;
-
     protected override void OnAppearing()
     {
         base.OnAppearing();
 
-        Cities = new ObservableCollection<City>()
+        if (!CitiesListViewModel.Initialied)
         {
-            new City
-            {
-                Name = "Malvaglia"
-            }
-        };
+            CitiesListViewModel.InitializeList();
+            CitiesListViewModel.Initialied = true;
+        }
     }
-    
-    protected override void OnPropertyChanged(string propertyName = null)
+
+    private async void OnAddCityClicked(object? sender, EventArgs eventArgs)
     {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        await Navigation.PushModalAsync(new AddCityPage(CitiesListViewModel));
     }
 }

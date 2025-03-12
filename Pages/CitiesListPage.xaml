@@ -4,7 +4,8 @@
              x:Class="WeatherApp.CitiesListPage"
              BackgroundColor="#87CEEB">
     
-    <Grid RowDefinitions="Auto,*">  
+    <Grid RowDefinitions="Auto,Auto,*">
+        <!-- App title frame -->
         <Frame Grid.Row="0"
                BackgroundColor="White"
                CornerRadius="0"
@@ -20,8 +21,23 @@
                    HorizontalTextAlignment="Center"
                    VerticalTextAlignment="Center" />
         </Frame>
+        
+        <!-- Add City Button -->
+        <HorizontalStackLayout Grid.Row="1"
+                               Padding="10"
+                               HorizontalOptions="End"
+                               VerticalOptions="Center">
+            <Button Text="Add City"
+                    BackgroundColor="#1E3A8A"
+                    TextColor="White"
+                    FontSize="18"
+                    CornerRadius="8"
+                    Padding="10"
+                    Clicked="OnAddCityClicked" />
+        </HorizontalStackLayout>
 
-        <CollectionView Grid.Row="1"
+        <!-- Cities list -->
+        <CollectionView Grid.Row="2"
                         ItemsLayout="VerticalList"
                         SelectionMode="Single"
                         ItemsSource="{Binding Cities}">
