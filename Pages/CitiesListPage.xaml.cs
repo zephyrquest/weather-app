@@ -1,4 +1,5 @@
-﻿using WeatherApp.Pages;
+﻿using WeatherApp.Models;
+using WeatherApp.Pages;
 using WeatherApp.ViewModels;
 
 namespace WeatherApp;
@@ -10,7 +11,6 @@ public partial class CitiesListPage : ContentPage
     public CitiesListPage()
     {
         InitializeComponent();
-        
         BindingContext = CitiesListViewModel;
     }
     
@@ -28,5 +28,13 @@ public partial class CitiesListPage : ContentPage
     private async void OnAddCityClicked(object? sender, EventArgs eventArgs)
     {
         await Navigation.PushModalAsync(new AddCityPage(CitiesListViewModel));
+    }
+
+    private async void OnListItemSelected(object? sender, SelectionChangedEventArgs eventArgs)
+    {
+        if (eventArgs.CurrentSelection.FirstOrDefault() is City selectedCity)
+        {
+            await Navigation.PushModalAsync(new CityDetailsPage(new CityDetailsViewModel(selectedCity)));
+        }
     }
 }
