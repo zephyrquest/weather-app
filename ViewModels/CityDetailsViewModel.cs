@@ -28,7 +28,8 @@ public class CityDetailsViewModel : BaseViewModel
     
     public async void LoadWeatherInfo()
     {
-        var weather = await _weatherService.GetCurrentWeatherByCityName(_city.Name, "");
+        var weather = await _weatherService.GetCurrentWeatherByCityName(_city.Name, 
+            _userConfigService.GetConfiguration("api_key"));
 
         if (weather != null)
         {

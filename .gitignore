@@ -383,3 +383,6 @@ snapshots-diff/
 temp
 .packages
 /src/Templates/.tempTemplateOutput
+
+#default user config tmp
+Resources/default_user_config_tmp.json

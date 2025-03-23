@@ -76,4 +76,11 @@
       </Compile>
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="Resources\default_user_config_tmp.json" />
+      <EmbeddedResource Include="Resources\default_user_config_tmp.json" />
+      <None Remove="Resources\default_user_config.json" />
+      <EmbeddedResource Include="Resources\default_user_config.json" />
+    </ItemGroup>
+
 </Project>

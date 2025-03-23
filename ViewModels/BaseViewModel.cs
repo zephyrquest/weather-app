@@ -6,10 +6,20 @@ namespace WeatherApp.ViewModels;
 
 public class BaseViewModel : INotifyPropertyChanged
 {
+    protected UserConfigService _userConfigService = new();
     protected WeatherService _weatherService = new();
 
     public BaseViewModel()
     {
+        if (!_userConfigService.UserConfigFileExist())
+        {
+            _userConfigService.ReadDefaultUserConfig();
+            _userConfigService.WriteUserConfig();
+        }
+        else
+        {
+            _userConfigService.ReadUserConfig();
+        }
     }
     
     public event PropertyChangedEventHandler? PropertyChanged;
