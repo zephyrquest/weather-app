@@ -27,7 +27,7 @@ public class CityDetailsViewModel : BaseViewModel
     
     public async void LoadWeatherInfo()
     {
-        var weather = await _weatherService.GetCurrentWeatherByCityName(_city.Name, 
+        var weather = await _weatherService.GetCurrentWeatherByCityLocation(_city.Latitude, _city.Longitude,
             _userConfigService.GetConfiguration("openweathermap_apikey"));
 
         if (weather != null)

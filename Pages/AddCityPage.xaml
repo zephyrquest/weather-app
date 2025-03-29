@@ -16,13 +16,45 @@
                VerticalTextAlignment="Center"
                Margin="0,0,0,20" />
         
-        <Entry Placeholder="Name"
-               WidthRequest="250"
-               FontSize="24"
-               BackgroundColor="White"
-               TextColor="#1E3A8A"
-               HorizontalTextAlignment="Center"
-               x:Name="InputName" />
+        <Border StrokeThickness="1"
+                Stroke="#1E3A8A"
+                BackgroundColor="White"
+                Padding="10"
+                Margin="30,10,30,0"
+                >
+            <VerticalStackLayout>
+                <SearchBar Placeholder="Search City"
+                           FontSize="18"
+                           BackgroundColor="White"
+                           TextColor="#1E3A8A"
+                           HorizontalTextAlignment="Start"
+                           TextChanged="OnCitySearchBarTextChanged"
+                           x:Name="CitySearchBar"/>
+        
+                <CollectionView ItemsLayout="VerticalList"
+                                SelectionMode="Single"
+                                ItemsSource="{Binding FilteredCities}"
+                                WidthRequest="250"
+                                SelectionChanged="OnCitySearchBarListClicked">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border StrokeThickness="0,0,0,1" Stroke="#1E3A8A">
+                                <StackLayout Padding="10">
+                                    <Label Text="{Binding Name}"
+                                           FontSize="18"
+                                           FontAttributes="Bold"
+                                           TextColor="#1E3A8A"/>
+                                    <Label Text="{Binding Country}"
+                                           FontSize="14"
+                                           FontAttributes="Bold"
+                                           TextColor="#1E3A8A"/>
+                                </StackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </Border>
         
         <Button Text="Add"
                 BackgroundColor="#1E3A8A"

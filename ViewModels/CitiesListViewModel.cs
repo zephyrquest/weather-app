@@ -32,31 +32,11 @@ public class CitiesListViewModel : BaseViewModel
     
     public void InitializeList()
     {
-        AddCity(new City
-        {
-            Name = "Malvaglia"
-        });
         
-        AddCity(new City
-        {
-            Name = "Biasca"
-        });
     }
 
     public void AddCity(City city)
     {
         Cities.Add(city);
-    }
-
-    public async Task<List<City>> GetCityByNameInitials(string nameInitials)
-    {
-        if (string.IsNullOrEmpty(nameInitials))
-        {
-            return new List<City>();
-        }
-        
-        return await _cityService.GetCitiesByNameInitials(nameInitials, 5, 
-                   _userConfigService.GetConfiguration("geonames_username")) 
-               ?? new List<City>();
     }
 }

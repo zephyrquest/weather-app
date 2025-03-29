@@ -33,14 +33,14 @@ public class CityService
             var latitude = (double?)jsonObject["geonames"]?[i]?["lat"];
             var longitude = (double?)jsonObject["geonames"]?[i]?["lng"];
 
-            if (!string.IsNullOrEmpty(name))
+            if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(country) && latitude != null && longitude != null)
             {
                 cities.Add(new City
                 {
                     Name = name,
                     Country = country,
-                    Latitude = latitude,
-                    Longitude = longitude
+                    Latitude = latitude.Value,
+                    Longitude = longitude.Value
                 });
             }
         }

@@ -5,6 +5,7 @@ namespace WeatherApp.Pages;
 
 public partial class AddCityPage : ContentPage
 {
+    private AddCityViewModel _addCityViewModel = new();
     private CitiesListViewModel _citiesListViewModel;
     
     public AddCityPage(CitiesListViewModel citiesListViewModel)
@@ -12,30 +13,51 @@ public partial class AddCityPage : ContentPage
         InitializeComponent();
 
         _citiesListViewModel = citiesListViewModel;
-        BindingContext = _citiesListViewModel;
+        BindingContext = _addCityViewModel;
     }
 
-    private async void OnAddClicked(object? sender, EventArgs eventArgs)
+    private void OnCitySearchBarTextChanged(object? sender, TextChangedEventArgs eventArgs)
     {
-        var input = InputName.Text.Trim();
+        if (_addCityViewModel.CurrentSelectedCity != null)
+        {
+            _addCityViewModel.CurrentSelectedCity = null;
+        }
+        
+        var cityNameInitials = CitySearchBar.Text.Trim();
 
-        if (string.IsNullOrEmpty(input))
+        if (string.IsNullOrEmpty(cityNameInitials))
         {
             return;
         }
 
-        City city = new City
-        {
-            Name = input
-        };
+        _addCityViewModel.UpdateCitySearchBar(cityNameInitials);
+    }
 
-        _citiesListViewModel.AddCity(city);
+    private void OnCitySearchBarListClicked(object? sender, SelectionChangedEventArgs eventArgs)
+    {
+        if (eventArgs.CurrentSelection.FirstOrDefault() is City selectedCity)
+        {
+            _addCityViewModel.FilteredCities.Clear();
+            CitySearchBar.Text = $"{selectedCity.Name}, {selectedCity.Country}";
+            _addCityViewModel.CurrentSelectedCity = selectedCity;
+        }
+    }
+
+    private async void OnAddClicked(object? sender, EventArgs eventArgs)
+    {
+        if (_addCityViewModel.CurrentSelectedCity != null)
+        {
+            _citiesListViewModel.AddCity(_addCityViewModel.CurrentSelectedCity);
+            _addCityViewModel.CurrentSelectedCity = null;
         
-        await Navigation.PopModalAsync();
+            await Navigation.PopModalAsync();
+        }
     }
 
     private async void OnCancelClicked(object? sender, EventArgs eventArgs)
     {
+        _addCityViewModel.CurrentSelectedCity = null;
+        
         await Navigation.PopModalAsync();
     }
 }
