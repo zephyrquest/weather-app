@@ -47,4 +47,16 @@ public class CitiesListViewModel : BaseViewModel
     {
         Cities.Add(city);
     }
+
+    public async Task<List<City>> GetCityByNameInitials(string nameInitials)
+    {
+        if (string.IsNullOrEmpty(nameInitials))
+        {
+            return new List<City>();
+        }
+        
+        return await _cityService.GetCitiesByNameInitials(nameInitials, 5, 
+                   _userConfigService.GetConfiguration("geonames_username")) 
+               ?? new List<City>();
+    }
 }

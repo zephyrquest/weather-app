@@ -1,5 +1,4 @@
 using WeatherApp.Models;
-using WeatherApp.Services;
 
 namespace WeatherApp.ViewModels;
 
@@ -29,7 +28,7 @@ public class CityDetailsViewModel : BaseViewModel
     public async void LoadWeatherInfo()
     {
         var weather = await _weatherService.GetCurrentWeatherByCityName(_city.Name, 
-            _userConfigService.GetConfiguration("api_key"));
+            _userConfigService.GetConfiguration("openweathermap_apikey"));
 
         if (weather != null)
         {

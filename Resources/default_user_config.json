@@ -1,3 +1,4 @@
 {
-  "api_key": ""
+  "openweathermap_apikey": "",
+  "geonames_username": ""
 }

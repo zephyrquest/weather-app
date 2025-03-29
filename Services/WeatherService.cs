@@ -20,25 +20,8 @@ public class WeatherService
 
         var content = await response.Content.ReadAsStringAsync();
         JObject jsonObject = JObject.Parse(content);
-        
-        var weather = new Weather
-        {
-            Main = (string?)jsonObject["weather"]?[0]?["main"] ?? "Unknown",
-            Description = (string?)jsonObject["weather"]?[0]?["description"] ?? "No description",
-            Icon = (string?)jsonObject["weather"]?[0]?["icon"],
 
-            Temperature = (double?)jsonObject["main"]?["temp"] ?? -999.0,
-            MinTemperature = (double?)jsonObject["main"]?["temp_min"] ?? -999.0,
-            MaxTemperature = (double?)jsonObject["main"]?["temp_max"] ?? -999.0,
-            Pressure = (double?)jsonObject["main"]?["pressure"] ?? -999.0,
-            Humidity = (double?)jsonObject["main"]?["humidity"] ?? -999.0,
-
-            WindSpeed = (double?)jsonObject["wind"]?["speed"] ?? -999.0,
-            Cloudiness = (double?)jsonObject["clouds"]?["all"] ?? -999.0,
-            Precipitation = (double?) jsonObject["rain"]?["1h"] ?? -999.0
-        };
-
-        return weather;
+        return CreateWeatherObject(jsonObject);
     }
     
     public async Task<Weather?> GetCurrentWeatherByCityName(string name, string apiKey)
@@ -54,22 +37,27 @@ public class WeatherService
 
         var content = await response.Content.ReadAsStringAsync();
         JObject jsonObject = JObject.Parse(content);
-        
+
+        return CreateWeatherObject(jsonObject);
+    }
+
+    private Weather CreateWeatherObject(JObject weatherJson)
+    {
         var weather = new Weather
         {
-            Main = (string?)jsonObject["weather"]?[0]?["main"] ?? "Unknown",
-            Description = (string?)jsonObject["weather"]?[0]?["description"] ?? "No description",
-            Icon = $"https://openweathermap.org/img/wn/{(string?)jsonObject["weather"]?[0]?["icon"]}@2x.png",
+            Main = (string?)weatherJson["weather"]?[0]?["main"] ?? "Unknown",
+            Description = (string?)weatherJson["weather"]?[0]?["description"] ?? "No description",
+            Icon = $"https://openweathermap.org/img/wn/{(string?)weatherJson["weather"]?[0]?["icon"]}@2x.png",
 
-            Temperature = (double?)jsonObject["main"]?["temp"] ?? null,
-            MinTemperature = (double?)jsonObject["main"]?["temp_min"] ?? null,
-            MaxTemperature = (double?)jsonObject["main"]?["temp_max"] ?? null,
-            Pressure = (double?)jsonObject["main"]?["pressure"] ?? null,
-            Humidity = (double?)jsonObject["main"]?["humidity"] ?? null,
+            Temperature = (double?)weatherJson["main"]?["temp"] ?? null,
+            MinTemperature = (double?)weatherJson["main"]?["temp_min"] ?? null,
+            MaxTemperature = (double?)weatherJson["main"]?["temp_max"] ?? null,
+            Pressure = (double?)weatherJson["main"]?["pressure"] ?? null,
+            Humidity = (double?)weatherJson["main"]?["humidity"] ?? null,
 
-            WindSpeed = (double?)jsonObject["wind"]?["speed"] ?? null,
-            Cloudiness = (double?)jsonObject["clouds"]?["all"] ?? null,
-            Precipitation = (double?) jsonObject["rain"]?["1h"] ?? null
+            WindSpeed = (double?)weatherJson["wind"]?["speed"] ?? null,
+            Cloudiness = (double?)weatherJson["clouds"]?["all"] ?? null,
+            Precipitation = (double?) weatherJson["rain"]?["1h"] ?? null
         };
 
         return weather;
