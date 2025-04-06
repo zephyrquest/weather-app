@@ -20,7 +20,7 @@ public partial class CitiesListPage : ContentPage
 
         if (!CitiesListViewModel.Initialied)
         {
-            CitiesListViewModel.InitializeList();
+            CitiesListViewModel.RetrieveCities();
             CitiesListViewModel.Initialied = true;
         }
     }

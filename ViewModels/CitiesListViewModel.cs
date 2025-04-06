@@ -30,13 +30,23 @@ public class CitiesListViewModel : BaseViewModel
         _initialied = false;
     }
     
-    public void InitializeList()
+    public async void RetrieveCities()
     {
-        
+        var cities = await _cityRepository.GetCities();
+
+        if (cities != null)
+        {
+            foreach (var city in cities)
+            {
+                Cities.Add(city);
+            }
+        }
     }
 
-    public void AddCity(City city)
+    public async void AddCity(City city)
     {
         Cities.Add(city);
+
+        await _cityRepository.SaveCity(city);
     }
 }
