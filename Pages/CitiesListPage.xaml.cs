@@ -37,4 +37,15 @@ public partial class CitiesListPage : ContentPage
             await Navigation.PushModalAsync(new CityDetailsPage(new CityDetailsViewModel(selectedCity)));
         }
     }
+
+    private void OnDeleteCityClicked(object? sender, EventArgs eventArgs)
+    {
+        if (sender is SwipeItemView item)
+        {
+            if (item.BindingContext is City city)
+            {
+                CitiesListViewModel.DeleteCity(city);
+            }
+        }
+    }
 }

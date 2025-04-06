@@ -32,4 +32,14 @@ public class CityRepository
         
         await _database.InsertAsync(city);
     }
+
+    public async Task DeleteCity(City city)
+    {
+        if (_database == null)
+        {
+            return;
+        }
+
+        await _database.DeleteAsync(city);
+    }
 }

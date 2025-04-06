@@ -44,34 +44,44 @@
                         ItemsSource="{Binding Cities}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Border Padding="15" 
-                            Margin="10"
-                            BackgroundColor="White" 
-                            StrokeShape="RoundRectangle 20"
-                            >
-                        <StackLayout>
-                            <Label Text="{Binding Name}"
-                                   FontSize="22"
-                                   FontAttributes="Bold"
-                                   TextColor="#1E3A8A"
-                                   FontFamily="OpenSans" />
-                            <Label Text="{Binding Country}"
-                                   FontSize="18"
-                                   TextColor="#1E3A8A"
-                                   FontFamily="OpenSans" />
-                            <HorizontalStackLayout Spacing="10">
-                                <Label Text="{Binding Latitude, StringFormat='Lat: {0}'}"
-                                       FontSize="16"
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems Mode="Reveal">
+                                <SwipeItemView Invoked="OnDeleteCityClicked">
+                                    <Border BackgroundColor="Red" StrokeShape="RoundRectangle 20" Padding="15">
+                                        <Label Text="Delete" FontSize="18" FontAttributes="Bold" VerticalOptions="Center"></Label>
+                                    </Border>
+                                </SwipeItemView>
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+                        <Border Padding="15" 
+                                Margin="10"
+                                BackgroundColor="White" 
+                                StrokeShape="RoundRectangle 20">
+                            <StackLayout>
+                                <Label Text="{Binding Name}"
+                                       FontSize="22"
+                                       FontAttributes="Bold"
                                        TextColor="#1E3A8A"
                                        FontFamily="OpenSans" />
+                                <Label Text="{Binding Country}"
+                                       FontSize="18"
+                                       TextColor="#1E3A8A"
+                                       FontFamily="OpenSans" />
+                                <HorizontalStackLayout Spacing="10">
+                                    <Label Text="{Binding Latitude, StringFormat='Lat: {0}'}"
+                                           FontSize="16"
+                                           TextColor="#1E3A8A"
+                                           FontFamily="OpenSans" />
         
-                                <Label Text="{Binding Longitude, StringFormat='Lon: {0}'}"
-                                       FontSize="16"
-                                       TextColor="#1E3A8A"
-                                       FontFamily="OpenSans" />
-                            </HorizontalStackLayout>
-                        </StackLayout>
-                    </Border>
+                                    <Label Text="{Binding Longitude, StringFormat='Lon: {0}'}"
+                                           FontSize="16"
+                                           TextColor="#1E3A8A"
+                                           FontFamily="OpenSans" />
+                                </HorizontalStackLayout>
+                            </StackLayout>
+                        </Border>
+                    </SwipeView>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

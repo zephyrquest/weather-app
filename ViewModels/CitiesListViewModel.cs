@@ -49,4 +49,11 @@ public class CitiesListViewModel : BaseViewModel
 
         await _cityRepository.SaveCity(city);
     }
+
+    public async void DeleteCity(City city)
+    {
+        Cities.Remove(city);
+
+        await _cityRepository.DeleteCity(city);
+    }
 }
