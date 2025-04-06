@@ -23,6 +23,9 @@ public partial class AddCityPage : ContentPage
             _addCityViewModel.CurrentSelectedCity = null;
         }
         
+        _addCityViewModel.CurrentSelectedCity = null;
+        _addCityViewModel.IsAddCityButtonEnabled = false;
+        
         var cityNameInitials = CitySearchBar.Text.Trim();
 
         if (string.IsNullOrEmpty(cityNameInitials))
@@ -40,6 +43,7 @@ public partial class AddCityPage : ContentPage
             _addCityViewModel.FilteredCities.Clear();
             CitySearchBar.Text = $"{selectedCity.Name}, {selectedCity.Country}";
             _addCityViewModel.CurrentSelectedCity = selectedCity;
+            _addCityViewModel.IsAddCityButtonEnabled = true;
         }
     }
 
@@ -57,6 +61,7 @@ public partial class AddCityPage : ContentPage
     private async void OnCancelClicked(object? sender, EventArgs eventArgs)
     {
         _addCityViewModel.CurrentSelectedCity = null;
+        _addCityViewModel.IsAddCityButtonEnabled = false;
         
         await Navigation.PopModalAsync();
     }
