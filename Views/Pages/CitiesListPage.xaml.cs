@@ -1,8 +1,7 @@
 ﻿using WeatherApp.Models;
-using WeatherApp.Pages;
 using WeatherApp.ViewModels;
 
-namespace WeatherApp;
+namespace WeatherApp.Views.Pages;
 
 public partial class CitiesListPage : ContentPage
 {

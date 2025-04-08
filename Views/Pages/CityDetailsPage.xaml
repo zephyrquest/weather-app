@@ -2,7 +2,7 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="WeatherApp.Pages.CityDetailsPage"
+             x:Class="WeatherApp.Views.Pages.CityDetailsPage"
              BackgroundColor="#87CEEB">
 
     <ContentPage.Content>
@@ -131,6 +131,22 @@
                          Grid.Row="7" Grid.Column="1" 
                          HorizontalTextAlignment="Start" />
             </Grid>
+            
+            <Button Text="Back"
+                    BackgroundColor="#1E3A8A"
+                    TextColor="White"
+                    CornerRadius="8"
+                    WidthRequest="300"
+                    FontSize="24"
+                    Clicked="OnBackClicked" />
+            
+            <Button Text="Back"
+                    BackgroundColor="#1E3A8A"
+                    TextColor="White"
+                    CornerRadius="8"
+                    WidthRequest="300"
+                    FontSize="24"
+                    Clicked="OnBackClicked" />
         </VerticalStackLayout>
     </ContentPage.Content>
 </ContentPage>

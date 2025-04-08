@@ -1,7 +1,7 @@
 using WeatherApp.Models;
 using WeatherApp.ViewModels;
 
-namespace WeatherApp.Pages;
+namespace WeatherApp.Views.Pages;
 
 public partial class AddCityPage : ContentPage
 {

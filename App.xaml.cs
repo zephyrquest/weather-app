@@ -1,4 +1,6 @@
-﻿namespace WeatherApp;
+﻿using WeatherApp.Views.Pages;
+
+namespace WeatherApp;
 
 public partial class App : Application
 {

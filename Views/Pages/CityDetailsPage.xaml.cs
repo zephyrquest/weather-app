@@ -1,6 +1,6 @@
 using WeatherApp.ViewModels;
 
-namespace WeatherApp.Pages;
+namespace WeatherApp.Views.Pages;
 
 public partial class CityDetailsPage : ContentPage
 {
@@ -19,5 +19,10 @@ public partial class CityDetailsPage : ContentPage
         base.OnAppearing();
         
         _cityDetailsViewModel.LoadWeatherInfo();
+    }
+
+    private async void OnBackClicked(object? sender, EventArgs eventArgs)
+    {
+        await Navigation.PopModalAsync();
     }
 }
