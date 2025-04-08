@@ -84,4 +84,14 @@
       <EmbeddedResource Include="Resources\default_user_config.json" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Views\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <AdditionalFiles Include="Views\Pages\AddCityPage.xaml" />
+      <AdditionalFiles Include="Views\Pages\CitiesListPage.xaml" />
+      <AdditionalFiles Include="Views\Pages\CityDetailsPage.xaml" />
+    </ItemGroup>
+
 </Project>
