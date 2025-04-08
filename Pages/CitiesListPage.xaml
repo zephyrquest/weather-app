@@ -4,8 +4,7 @@
              x:Class="WeatherApp.CitiesListPage"
              BackgroundColor="#87CEEB">
     
-    <Grid RowDefinitions="Auto,Auto,*">
-        <!-- App title frame -->
+    <Grid RowDefinitions="Auto,Auto,Auto,*">
         <Frame Grid.Row="0"
                BackgroundColor="White"
                CornerRadius="0"
@@ -22,7 +21,6 @@
                    VerticalTextAlignment="Center" />
         </Frame>
         
-        <!-- Add City Button -->
         <HorizontalStackLayout Grid.Row="1"
                                Padding="10"
                                HorizontalOptions="End"
@@ -35,55 +33,100 @@
                     Padding="10"
                     Clicked="OnAddCityClicked" />
         </HorizontalStackLayout>
-
-        <!-- Cities list -->
-        <CollectionView Grid.Row="2"
-                        ItemsLayout="VerticalList"
-                        SelectionMode="Single"
-                        SelectionChanged="OnListItemSelected"
-                        ItemsSource="{Binding Cities}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <SwipeView>
-                        <SwipeView.RightItems>
-                            <SwipeItems Mode="Reveal">
-                                <SwipeItemView Invoked="OnDeleteCityClicked">
-                                    <Border BackgroundColor="Red" StrokeShape="RoundRectangle 20" Padding="15">
-                                        <Label Text="Delete" FontSize="18" FontAttributes="Bold" VerticalOptions="Center"></Label>
-                                    </Border>
-                                </SwipeItemView>
-                            </SwipeItems>
-                        </SwipeView.RightItems>
-                        <Border Padding="15" 
-                                Margin="10"
-                                BackgroundColor="White" 
-                                StrokeShape="RoundRectangle 20">
-                            <StackLayout>
-                                <Label Text="{Binding Name}"
-                                       FontSize="22"
-                                       FontAttributes="Bold"
-                                       TextColor="#1E3A8A"
-                                       FontFamily="OpenSans" />
-                                <Label Text="{Binding Country}"
-                                       FontSize="18"
-                                       TextColor="#1E3A8A"
-                                       FontFamily="OpenSans" />
-                                <HorizontalStackLayout Spacing="10">
-                                    <Label Text="{Binding Latitude, StringFormat='Lat: {0}'}"
-                                           FontSize="16"
-                                           TextColor="#1E3A8A"
-                                           FontFamily="OpenSans" />
         
-                                    <Label Text="{Binding Longitude, StringFormat='Lon: {0}'}"
-                                           FontSize="16"
+        <VerticalStackLayout Grid.Row="2" Margin="0,0,0,20" IsVisible="{Binding HasCurrentLocationCity}">
+            <Label Text="You are currently here:"
+                   FontSize="20"
+                   TextColor="#1E3A8A"
+                   FontAttributes="Bold"
+                   FontFamily="OpenSans"
+                   Margin="10,0,10,5" />
+
+            <Border Padding="15" 
+                    Margin="10"
+                    BackgroundColor="White" 
+                    StrokeShape="RoundRectangle 20">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnCurrentLocationCitySelected" />
+                </Border.GestureRecognizers>
+                <StackLayout>
+                    <Label Text="{Binding CurrentLocationCity.Name}"
+                           FontSize="22"
+                           FontAttributes="Bold"
+                           TextColor="#1E3A8A"
+                           FontFamily="OpenSans" />
+                    <Label Text="{Binding CurrentLocationCity.Country}"
+                           FontSize="18"
+                           TextColor="#1E3A8A"
+                           FontFamily="OpenSans" />
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Text="{Binding CurrentLocationCity.Latitude, StringFormat='Lat: {0}'}"
+                               FontSize="16"
+                               TextColor="#1E3A8A"
+                               FontFamily="OpenSans" />
+                        <Label Text="{Binding CurrentLocationCity.Longitude, StringFormat='Lon: {0}'}"
+                               FontSize="16"
+                               TextColor="#1E3A8A"
+                               FontFamily="OpenSans" />
+                    </HorizontalStackLayout>
+                </StackLayout>
+            </Border>
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Grid.Row="3">
+            <Label Text="Your saved cities:"
+                   FontSize="20"
+                   TextColor="#1E3A8A"
+                   FontAttributes="Bold"
+                   FontFamily="OpenSans"
+                   Margin="10,0,10,5" />
+            <CollectionView ItemsLayout="VerticalList"
+                            SelectionMode="Single"
+                            SelectionChanged="OnListItemSelected"
+                            ItemsSource="{Binding Cities}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems Mode="Reveal">
+                                    <SwipeItemView Invoked="OnDeleteCityClicked">
+                                        <Border BackgroundColor="Red" StrokeShape="RoundRectangle 20" Padding="15">
+                                            <Label Text="Delete" FontSize="18" FontAttributes="Bold" VerticalOptions="Center"></Label>
+                                        </Border>
+                                    </SwipeItemView>
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <Border Padding="15" 
+                                    Margin="10"
+                                    BackgroundColor="White" 
+                                    StrokeShape="RoundRectangle 20">
+                                <StackLayout>
+                                    <Label Text="{Binding Name}"
+                                           FontSize="22"
+                                           FontAttributes="Bold"
                                            TextColor="#1E3A8A"
                                            FontFamily="OpenSans" />
-                                </HorizontalStackLayout>
-                            </StackLayout>
-                        </Border>
-                    </SwipeView>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                                    <Label Text="{Binding Country}"
+                                           FontSize="18"
+                                           TextColor="#1E3A8A"
+                                           FontFamily="OpenSans" />
+                                    <HorizontalStackLayout Spacing="10">
+                                        <Label Text="{Binding Latitude, StringFormat='Lat: {0}'}"
+                                               FontSize="16"
+                                               TextColor="#1E3A8A"
+                                               FontFamily="OpenSans" />
+            
+                                        <Label Text="{Binding Longitude, StringFormat='Lon: {0}'}"
+                                               FontSize="16"
+                                               TextColor="#1E3A8A"
+                                               FontFamily="OpenSans" />
+                                    </HorizontalStackLayout>
+                                </StackLayout>
+                            </Border>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
     </Grid>
 </ContentPage>

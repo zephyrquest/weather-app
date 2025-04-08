@@ -12,6 +12,7 @@ public class BaseViewModel : INotifyPropertyChanged
     protected UserConfigService _userConfigService = new();
     protected WeatherService _weatherService = new();
     protected CityService _cityService = new();
+    protected LocalisationService _localisationService = new();
 
     
     public BaseViewModel()

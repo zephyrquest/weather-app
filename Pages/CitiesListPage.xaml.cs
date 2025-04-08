@@ -20,7 +20,8 @@ public partial class CitiesListPage : ContentPage
 
         if (!CitiesListViewModel.Initialied)
         {
-            CitiesListViewModel.RetrieveCities();
+            CitiesListViewModel.SetCurrentLocationCity();
+            CitiesListViewModel.RetrieveSavedCities();
             CitiesListViewModel.Initialied = true;
         }
     }
@@ -28,6 +29,14 @@ public partial class CitiesListPage : ContentPage
     private async void OnAddCityClicked(object? sender, EventArgs eventArgs)
     {
         await Navigation.PushModalAsync(new AddCityPage(CitiesListViewModel));
+    }
+
+    private async void OnCurrentLocationCitySelected(object? sender, TappedEventArgs tappedEventArgs)
+    {
+        if (CitiesListViewModel.CurrentLocationCity != null)
+        {
+            await Navigation.PushModalAsync(new CityDetailsPage(new CityDetailsViewModel(CitiesListViewModel.CurrentLocationCity)));
+        }
     }
 
     private async void OnListItemSelected(object? sender, SelectionChangedEventArgs eventArgs)

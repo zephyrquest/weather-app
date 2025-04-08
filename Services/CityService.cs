@@ -47,4 +47,47 @@ public class CityService
 
         return cities;
     }
+
+    public async Task<string?> GetCountryName(double latitude, double longitude, string username)
+    {
+        var response = await _httpClient.GetAsync(
+            $"https://secure.geonames.org/countryCode?lat={latitude}&lng={longitude}&type=json&username={username}"
+            );
+        
+        if (!response.IsSuccessStatusCode)
+        {
+            return null;
+        }
+
+        var content = await response.Content.ReadAsStringAsync();
+        JObject jsonObject = JObject.Parse(content);
+
+        var countryName = (string?)jsonObject["countryName"];
+
+        return countryName;
+    }
+    
+    public async Task<string?> GetCityName(double latitude, double longitude, string apikey)
+    {
+        var response = await _httpClient.GetAsync(
+            $"https://api.openweathermap.org/geo/1.0/reverse?lat={latitude}&lon={longitude}&appid={apikey}"
+        );
+        
+        if (!response.IsSuccessStatusCode)
+        {
+            return null;
+        }
+
+        var content = await response.Content.ReadAsStringAsync();
+        JArray jsonArray = JArray.Parse(content);
+        if (jsonArray.Count == 0)
+        {
+            return null;
+        }
+        
+        JObject jsonObject = (JObject)jsonArray[0];
+        var cityName = (string?)jsonObject["name"];
+
+        return cityName;
+    }
 }
