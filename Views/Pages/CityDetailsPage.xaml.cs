@@ -18,11 +18,19 @@ public partial class CityDetailsPage : ContentPage
     {
         base.OnAppearing();
         
-        _cityDetailsViewModel.LoadWeatherInfo();
+        _cityDetailsViewModel.LoadCurrentWeather();
+    }
+
+    private async void OnForecastClicked(object? sender, EventArgs eventArgs)
+    {
+        await Navigation.PushModalAsync(new CityForecastPage(_cityDetailsViewModel));
     }
 
     private async void OnBackClicked(object? sender, EventArgs eventArgs)
     {
+        _cityDetailsViewModel.CurrentWeather = null;
+        _cityDetailsViewModel.City = null;
+        
         await Navigation.PopModalAsync();
     }
 }

@@ -14,4 +14,5 @@ public class Weather
     public double? WindSpeed { get; set; }
     public double? Cloudiness { get; set; }
     public double? Precipitation { get; set; }
+    public DateTime LocalTime { get; set; }
 }

@@ -16,20 +16,25 @@
                    FontAttributes="Bold"
                    TextColor="#1E3A8A"
                    HorizontalTextAlignment="Center" />
+            
+            <Label Text="{Binding CurrentWeather.LocalTime, StringFormat='{0:dddd, MMM dd yyyy hh:mm tt}'}"
+                   FontSize="18"
+                   TextColor="White"
+                   HorizontalTextAlignment="Center" />
 
-            <Image Source="{Binding Weather.Icon}"
+            <Image Source="{Binding CurrentWeather.Icon}"
                    WidthRequest="100"
                    HeightRequest="100"
                    HorizontalOptions="Center"
-                   Margin="0,10,0,10" />
+                   Margin="0,5,0,5" />
 
-            <Label Text="{Binding Weather.Main}" 
+            <Label Text="{Binding CurrentWeather.Main}" 
                    FontSize="32"
                    FontAttributes="Bold"
                    TextColor="White"
                    HorizontalTextAlignment="Center" />
 
-            <Label Text="{Binding Weather.Description}" 
+            <Label Text="{Binding CurrentWeather.Description}" 
                    FontSize="24"
                    TextColor="White"
                    HorizontalTextAlignment="Center" />
@@ -56,7 +61,7 @@
                          Grid.Row="0" Grid.Column="0" 
                          HorizontalTextAlignment="Start" />
 
-                  <Label Text="{Binding Weather.Temperature, StringFormat='{0}°', TargetNullValue='No info available'}" 
+                  <Label Text="{Binding CurrentWeather.Temperature, StringFormat='{0}°', TargetNullValue='No info available'}" 
                          FontSize="18" TextColor="White" 
                          Grid.Row="0" Grid.Column="1" 
                          HorizontalTextAlignment="Start" />
@@ -66,7 +71,7 @@
                          Grid.Row="1" Grid.Column="0" 
                          HorizontalTextAlignment="Start" />
 
-                  <Label Text="{Binding Weather.MinTemperature, StringFormat='{0}°', TargetNullValue='No info available'}" 
+                  <Label Text="{Binding CurrentWeather.MinTemperature, StringFormat='{0}°', TargetNullValue='No info available'}" 
                          FontSize="18" TextColor="White" 
                          Grid.Row="1" Grid.Column="1" 
                          HorizontalTextAlignment="Start" />
@@ -76,7 +81,7 @@
                          Grid.Row="2" Grid.Column="0" 
                          HorizontalTextAlignment="Start" />
 
-                  <Label Text="{Binding Weather.MaxTemperature, StringFormat='{0}°', TargetNullValue='No info available'}" 
+                  <Label Text="{Binding CurrentWeather.MaxTemperature, StringFormat='{0}°', TargetNullValue='No info available'}" 
                          FontSize="18" TextColor="White" 
                          Grid.Row="2" Grid.Column="1" 
                          HorizontalTextAlignment="Start" />
@@ -86,7 +91,7 @@
                          Grid.Row="3" Grid.Column="0" 
                          HorizontalTextAlignment="Start" />
 
-                  <Label Text="{Binding Weather.Pressure, StringFormat='{0} hPA', TargetNullValue='No info available'}" 
+                  <Label Text="{Binding CurrentWeather.Pressure, StringFormat='{0} hPA', TargetNullValue='No info available'}" 
                          FontSize="18" TextColor="White" 
                          Grid.Row="3" Grid.Column="1" 
                          HorizontalTextAlignment="Start" />
@@ -96,7 +101,7 @@
                          Grid.Row="4" Grid.Column="0" 
                          HorizontalTextAlignment="Start" />
 
-                  <Label Text="{Binding Weather.Humidity, StringFormat='{0} %', TargetNullValue='No info available'}" 
+                  <Label Text="{Binding CurrentWeather.Humidity, StringFormat='{0} %', TargetNullValue='No info available'}" 
                          FontSize="18" TextColor="White" 
                          Grid.Row="4" Grid.Column="1" 
                          HorizontalTextAlignment="Start" />
@@ -106,7 +111,7 @@
                          Grid.Row="5" Grid.Column="0" 
                          HorizontalTextAlignment="Start" />
 
-                  <Label Text="{Binding Weather.WindSpeed, StringFormat='{0} m/s', TargetNullValue='No info available'}" 
+                  <Label Text="{Binding CurrentWeather.WindSpeed, StringFormat='{0} m/s', TargetNullValue='No info available'}" 
                          FontSize="18" TextColor="White" 
                          Grid.Row="5" Grid.Column="1" 
                          HorizontalTextAlignment="Start" />
@@ -116,7 +121,7 @@
                          Grid.Row="6" Grid.Column="0" 
                          HorizontalTextAlignment="Start" />
 
-                  <Label Text="{Binding Weather.Cloudiness, StringFormat='{0} %', TargetNullValue='No info available'}" 
+                  <Label Text="{Binding CurrentWeather.Cloudiness, StringFormat='{0} %', TargetNullValue='No info available'}" 
                          FontSize="18" TextColor="White" 
                          Grid.Row="6" Grid.Column="1" 
                          HorizontalTextAlignment="Start" />
@@ -126,26 +131,24 @@
                          Grid.Row="7" Grid.Column="0" 
                          HorizontalTextAlignment="Start" />
 
-                  <Label Text="{Binding Weather.Precipitation, StringFormat='{0} mm/h', TargetNullValue='No info available'}" 
+                  <Label Text="{Binding CurrentWeather.Precipitation, StringFormat='{0} mm/h', TargetNullValue='No info available'}" 
                          FontSize="18" TextColor="White" 
                          Grid.Row="7" Grid.Column="1" 
                          HorizontalTextAlignment="Start" />
             </Grid>
             
-            <Button Text="Back"
+            <Button Text="5 days forecast"
                     BackgroundColor="#1E3A8A"
                     TextColor="White"
                     CornerRadius="8"
-                    WidthRequest="300"
-                    FontSize="24"
-                    Clicked="OnBackClicked" />
+                    FontSize="20"
+                    Clicked="OnForecastClicked" />
             
             <Button Text="Back"
                     BackgroundColor="#1E3A8A"
                     TextColor="White"
                     CornerRadius="8"
-                    WidthRequest="300"
-                    FontSize="24"
+                    FontSize="20"
                     Clicked="OnBackClicked" />
         </VerticalStackLayout>
     </ContentPage.Content>
