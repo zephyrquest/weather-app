@@ -9,27 +9,32 @@ namespace WeatherApp.Views.Pages;
 
 public partial class CityForecastPage : ContentPage
 {
-    private CityDetailsViewModel _cityDetailsViewModel;
+    private CityForecastViewModel _cityForecastViewModel;
     
-    public CityForecastPage(CityDetailsViewModel cityDetailsViewModel)
+    public CityForecastPage(CityForecastViewModel cityForecastViewModel)
     {
         InitializeComponent();
 
-        _cityDetailsViewModel = cityDetailsViewModel;
-        BindingContext = _cityDetailsViewModel;
+        _cityForecastViewModel = cityForecastViewModel;
+        BindingContext = _cityForecastViewModel;
     }
 
     protected override void OnAppearing()
     {
         base.OnAppearing();
         
-        _cityDetailsViewModel.LoadWeatherForecast();
+        _cityForecastViewModel.LoadWeatherForecast();
     }
 
     protected override void OnDisappearing()
     {
         base.OnDisappearing();
         
-        _cityDetailsViewModel.DailyForecasts.Clear();
+        _cityForecastViewModel.DailyForecasts.Clear();
+    }
+
+    private async void OnBackClicked(object? sender, EventArgs eventArgs)
+    {
+        await Navigation.PopModalAsync();
     }
 }

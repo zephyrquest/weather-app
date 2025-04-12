@@ -3,12 +3,11 @@ using WeatherApp.Models;
 
 namespace WeatherApp.ViewModels;
 
-public class CityDetailsViewModel : BaseViewModel
+public class CityForecastViewModel : BaseViewModel
 {
     private City? _city;
-    private Weather? _currentWeather;
     private ObservableCollection<DailyForecast> _dailyForecasts;
-
+    
     public City? City
     {
         get => _city;
@@ -18,17 +17,7 @@ public class CityDetailsViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
-
-    public Weather? CurrentWeather
-    {
-        get => _currentWeather;
-        set
-        {
-            _currentWeather = value;
-            OnPropertyChanged();
-        }
-    }
-
+    
     public ObservableCollection<DailyForecast> DailyForecasts
     {
         get => _dailyForecasts;
@@ -39,26 +28,29 @@ public class CityDetailsViewModel : BaseViewModel
         }
     }
 
-    public CityDetailsViewModel(City city)
+    public CityForecastViewModel(City city)
     {
         City = city;
-        CurrentWeather = null;
         DailyForecasts = new ObservableCollection<DailyForecast>();
     }
     
-    public async void LoadCurrentWeather()
+    public async void LoadWeatherForecast()
     {
         if (City == null)
         {
             return;
         }
         
-        var weather = await _weatherService.GetCurrentWeatherByCityLocation(City.Latitude, City.Longitude,
+        var weatherForecasts = await _weatherService.GetDailyWeatherForecastsByCityLocation(City.Latitude, City.Longitude,
             _userConfigService.GetConfiguration("openweathermap_apikey"));
 
-        if (weather != null)
+        if (weatherForecasts != null)
         {
-            CurrentWeather = weather;
+            foreach (var weather in weatherForecasts)
+            {
+                weather.City = City;
+                DailyForecasts.Add(weather);
+            }
         }
     }
 }

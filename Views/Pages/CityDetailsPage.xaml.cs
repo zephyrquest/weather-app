@@ -23,7 +23,7 @@ public partial class CityDetailsPage : ContentPage
 
     private async void OnForecastClicked(object? sender, EventArgs eventArgs)
     {
-        await Navigation.PushModalAsync(new CityForecastPage(_cityDetailsViewModel));
+        await Navigation.PushModalAsync(new CityForecastPage(new CityForecastViewModel(_cityDetailsViewModel.City)));
     }
 
     private async void OnBackClicked(object? sender, EventArgs eventArgs)
