@@ -10,7 +10,7 @@ public class WeatherService
     public async Task<Weather?> GetCurrentWeatherByCityLocation(double latitude, double longitude, string apiKey)
     {
         var response = await _httpClient.GetAsync(
-            @$"https://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&appid={apiKey}"
+            @$"https://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&units=metric&appid={apiKey}"
         );
 
         if (!response.IsSuccessStatusCode)
@@ -27,7 +27,7 @@ public class WeatherService
     public async Task<Weather?> GetCurrentWeatherByCityName(string name, string apiKey)
     {
         var response = await _httpClient.GetAsync(
-            $"https://api.openweathermap.org/data/2.5/weather?q={name}&appid={apiKey}&units=metric"
+            $"https://api.openweathermap.org/data/2.5/weather?q={name}&units=metric&appid={apiKey}"
         );
 
         if (!response.IsSuccessStatusCode)
@@ -44,7 +44,7 @@ public class WeatherService
     public async Task<List<DailyForecast>?> GetDailyWeatherForecastsByCityLocation(double latitude, double longitude, string apiKey)
     {
         var response = await _httpClient.GetAsync(
-            @$"https://api.openweathermap.org/data/2.5/forecast?lat={latitude}&lon={longitude}&appid={apiKey}"
+            @$"https://api.openweathermap.org/data/2.5/forecast?lat={latitude}&lon={longitude}&units=metric&appid={apiKey}"
         );
 
         if (!response.IsSuccessStatusCode)
